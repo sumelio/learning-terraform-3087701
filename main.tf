@@ -117,7 +117,7 @@ resource "aws_lb_target_group_attachment" "blog" {
   port             = 80
 }
 
-module "blog" {
+module "blog_autoscalling" {
   source  = "terraform-aws-modules/autoscalling/aws"
   version = "9.0.2"
 
