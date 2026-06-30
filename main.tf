@@ -22,3 +22,12 @@ resource "aws_instance" "web" {
     Name = "HelloWorld"
   }
 }
+
+variable "region" {
+  type    = string
+  default = "us-east-1"
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
