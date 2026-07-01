@@ -11,7 +11,7 @@ variable "ami_filter" {
     owner = string
   })
 
-  default {
+  default = {
     name   = "al2023-ami-*-x86_64"
     owner  =  "amazon"
   }
