@@ -6,7 +6,7 @@ variable "instance_type" {
 variable "ami_filter" {
   description = "Name filter and owner for AMI"
   
-  type = objcet ({
+  type = object ({
     name = string
     owner = string
   })
