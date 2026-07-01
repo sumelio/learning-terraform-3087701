@@ -34,7 +34,7 @@ module "blog_sg" {
   version = "~> 5.0"   # was 6.0.0
 
   vpc_id      = module.blog_vpc.vpc_id
-  name        = "blog_new_freddy"
+  name        = "${var.environment.name}-blog"
   description = "Allow http and https in, all out"
 
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]
@@ -85,7 +85,7 @@ resource "aws_security_group_rule" "blog_http_out" {
 module "blog_alb" {
   source = "terraform-aws-modules/alb/aws"
 
-  name    = "blog-alb"
+  name    = "${var.environment.name}-blog-alb"
   vpc_id  = module.blog_vpc.vpc_id
   subnets = module.blog_vpc.public_subnets
 
@@ -107,7 +107,7 @@ module "blog_alb" {
 }
 
 resource "aws_lb_target_group" "blog" {
-  name     = "blog"
+  name     = ""${var.environment.name}-blog"
   port     = 80
   protocol = "HTTP"
   vpc_id   = module.blog_vpc.vpc_id
@@ -124,14 +124,14 @@ module "blog_autoscalling" {
 
   vpc_zone_identifier = module.blog_vpc.public_subnets
 
-  launch_template_name = "blog"
+  launch_template_name = "${var.environment.name}-blog"
   security_groups = [module.blog_sg.security_group_id]
 
   instance_type = var.instance_type
   image_id      = data.aws_ami.app_ami.id
 
   traffic_source_attachments = {
-    blog-alb = {
+    ${var.environment.name}-blog-alb = {
       traffic_source_identifier = aws_lb_target_group.blog.arn
     }
   }
