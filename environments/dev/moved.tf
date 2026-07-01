@@ -1,11 +1,11 @@
 moved {
     from = module.blog_vpc
-    to.  = module.dev.module.blog_vpc
+    to  = module.dev.module.blog_vpc
 }
 
 moved {
     from = module.blog_sg
-    to.  = module.dev.module.blog_sg
+    to  = module.dev.module.blog_sg
 }
 
 moved {
